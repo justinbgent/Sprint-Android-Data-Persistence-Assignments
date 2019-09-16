@@ -2,6 +2,7 @@ package com.example.entries
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             Book("Skyward,It's so good,true,0")
         )
 
-//        bookList.forEach {
+        //        bookList.forEach {
 //            var textView = TextView(this)
 //            textView.text = it.title
 //            linear_layout.addView(textView)
