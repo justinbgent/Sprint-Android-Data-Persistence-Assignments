@@ -3,4 +3,5 @@
     <string name="id">Id</string>
     <string name="reason_to_read">Reason to Read</string>
     <string name="title">Title</string>
+    <string name="add_book">Add Book</string>
 </resources>

@@ -27,22 +27,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edt_txt_title" />
 
-    <EditText
-        android:id="@+id/edt_txt_id"
-        android:hint="@string/id"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_txt_reason" />
+<!--    <EditText-->
+<!--        android:id="@+id/edt_txt_id"-->
+<!--        android:hint="@string/id"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/edt_txt_reason" />-->
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edt_txt_id"
+        app:layout_constraintTop_toBottomOf="@id/edt_txt_reason"
         app:layout_constraintLeft_toLeftOf="parent"
         android:onClick="onCheckBoxClicked"/>
 
