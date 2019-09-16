@@ -86,8 +86,10 @@ class Prefs(context: Context) {
         // step through that list and read each entry
         val entryList = java.util.ArrayList<JournalEntry>()
         for (id in listOfIds) {
-            readEntry(id.toInt())?.let {
-                entryList.add(it)
+            if(id.isNotBlank()){
+                readEntry(id.toInt())?.let {
+                    entryList.add(it)
+                }
             }
         }
         return entryList
