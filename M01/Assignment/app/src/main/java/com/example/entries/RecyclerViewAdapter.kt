@@ -1,5 +1,6 @@
 package com.example.entries
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -14,7 +15,7 @@ class RecyclerViewAdapter(private val books: MutableList<Book>): RecyclerView.Ad
     lateinit var context: Context
 
     inner class Holder(view: View): RecyclerView.ViewHolder(view){
-        var linear = view.linear_layout_recycler
+        var txtTitle = view.txt_title
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -28,14 +29,14 @@ class RecyclerViewAdapter(private val books: MutableList<Book>): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val book = books[position]
-        var textView = TextView(holder.linear.context)
+        val textView = holder.txtTitle
         textView.text = book.title
 
         textView.setOnClickListener {
             val intent = Intent(context, EditBookActivity::class.java)
             intent.putExtra(MainActivity.STRING_KEY, book.toCsvString())
-            context.startActivity(intent)
+            (context as? Activity)?.startActivityForResult(intent, MainActivity.EDIT_BOOK)
+
         }
-        holder.linear.addView(textView)
     }
 }

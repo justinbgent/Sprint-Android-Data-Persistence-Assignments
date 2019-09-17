@@ -17,7 +17,6 @@ class EditBookActivity : AppCompatActivity() {
 
         var id = intent.getStringExtra(MainActivity.ID_KEY)
 
-
         var bookCSV = intent.getStringExtra(MainActivity.STRING_KEY)
         var book: Book? = if (bookCSV != null) Book(bookCSV) else null
 
@@ -62,6 +61,6 @@ class EditBookActivity : AppCompatActivity() {
 //    }
 
     fun onCheckBoxClicked(view: View) {
-        !hasBeenRead
+        hasBeenRead = !hasBeenRead
     }
 }
