@@ -1,7 +1,9 @@
 package com.example.entries
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,9 +20,14 @@ class MainActivity : AppCompatActivity() {
         const val ID_KEY = "ID_KEY"
         const val ADD_BOOK = 345
         const val EDIT_BOOK = 545
+        const val USER_PREFERENCES = "USER_PREFERENCES"
 
         var bookList = mutableListOf<Book>()
+
+        lateinit var preferences: SharedPreferences
     }
+
+
 
     lateinit var adapter: RecyclerViewAdapter
 
@@ -28,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        preferences = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE)
 
         bookList = mutableListOf<Book>(
             Book("Skyward", "It's so good", true, "0"),
@@ -64,7 +72,6 @@ class MainActivity : AppCompatActivity() {
             if(bookCSV != null){
                 val book = Book(bookCSV)
                 bookList.add(book)
-                Log.i("pleasework", "book add")
                 adapter.notifyDataSetChanged()
             }
         }
@@ -73,8 +80,6 @@ class MainActivity : AppCompatActivity() {
             if(bookCSV != null){
                 val book = Book(bookCSV)
                 val index = book.id
-                Log.i("pleasework", index)
-                Log.i("pleasework", "${bookList.size}")
                 bookList[index!!.toInt()] = book
                 adapter.notifyDataSetChanged()
             }
