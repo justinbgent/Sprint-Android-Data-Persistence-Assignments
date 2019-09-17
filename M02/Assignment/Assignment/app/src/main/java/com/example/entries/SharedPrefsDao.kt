@@ -1,7 +1,7 @@
 package com.example.entries
 
 import com.example.entries.model.Book
-import com.example.entries.model.BooksModel
+import com.example.entries.model.Constants
 
 class SharedPrefsDao {
 
@@ -12,9 +12,9 @@ class SharedPrefsDao {
 
     fun saveAllIds() {
         var ids = ""
-        for (i in BooksModel.bookList.indices) {
+        for (i in Constants.bookList.indices) {
             ids +=
-                if (BooksModel.bookList.size - 1 != i) {
+                if (Constants.bookList.size - 1 != i) {
                     "$i,"
                 } else {
                     "$i"
@@ -26,9 +26,9 @@ class SharedPrefsDao {
     }
 
     fun saveAllBookCvs(){
-        for (i in BooksModel.bookList.indices) {
+        for (i in Constants.bookList.indices) {
             SharedPrefOperations.preferences.edit()
-                .putString(BooksModel.bookList[i].id, BooksModel.bookList[i].toCsvString())
+                .putString(Constants.bookList[i].id, Constants.bookList[i].toCsvString())
                 .apply()
         }
     }
@@ -45,14 +45,14 @@ class SharedPrefsDao {
 
     fun updateBook(book: Book) {
         var bookUpdated = false
-        for (i in BooksModel.bookList.indices) {
-            if (BooksModel.bookList[i].id == book.id) {
-                BooksModel.bookList[i] = book
+        for (i in Constants.bookList.indices) {
+            if (Constants.bookList[i].id == book.id) {
+                Constants.bookList[i] = book
                 bookUpdated = true
             }
         }
         if (!bookUpdated) {
-            BooksModel.bookList.add(book)
+            Constants.bookList.add(book)
         }
     }
 }

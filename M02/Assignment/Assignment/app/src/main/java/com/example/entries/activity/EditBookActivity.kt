@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.entries.model.Book
 import com.example.entries.R
-import com.example.entries.model.BooksModel
+import com.example.entries.model.Constants
 import kotlinx.android.synthetic.main.activity_edit_book.*
 
 class EditBookActivity : AppCompatActivity() {
@@ -18,9 +18,9 @@ class EditBookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_book)
 
-        var id = intent.getStringExtra(BooksModel.ID_KEY)
+        var id = intent.getStringExtra(Constants.ID_KEY)
 
-        val bookCSV = intent.getStringExtra(BooksModel.STRING_KEY)
+        val bookCSV = intent.getStringExtra(Constants.STRING_KEY)
         var book: Book? = if (bookCSV != null) Book(
             bookCSV
         ) else null
@@ -46,14 +46,14 @@ class EditBookActivity : AppCompatActivity() {
                 title,
                 reason,
                 hasBeenRead,
-                id ?: BooksModel.bookList.size.toString()
+                id ?: Constants.bookList.size.toString()
             )
             return book?.toCsvString() ?: "Empty"
         }
 
         btn_save.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(BooksModel.STRING_KEY, returnData())
+            intent.putExtra(Constants.STRING_KEY, returnData())
             setResult(Activity.RESULT_OK, intent)
             finish()
         }

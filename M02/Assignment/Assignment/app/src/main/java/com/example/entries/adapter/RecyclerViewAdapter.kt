@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.entries.R
 import com.example.entries.activity.EditBookActivity
-import com.example.entries.activity.MainActivity
 import com.example.entries.model.Book
-import com.example.entries.model.BooksModel
+import com.example.entries.model.Constants
 import kotlinx.android.synthetic.main.recycler_item.view.*
 
 class RecyclerViewAdapter(private val books: MutableList<Book>): RecyclerView.Adapter<RecyclerViewAdapter.Holder>() {
@@ -38,8 +37,8 @@ class RecyclerViewAdapter(private val books: MutableList<Book>): RecyclerView.Ad
 
         textView.setOnClickListener {
             val intent = Intent(context, EditBookActivity::class.java)
-            intent.putExtra(BooksModel.STRING_KEY, book.toCsvString())
-            (context as? Activity)?.startActivityForResult(intent, BooksModel.EDIT_BOOK)
+            intent.putExtra(Constants.STRING_KEY, book.toCsvString())
+            (context as? Activity)?.startActivityForResult(intent, Constants.EDIT_BOOK)
 
         }
     }
