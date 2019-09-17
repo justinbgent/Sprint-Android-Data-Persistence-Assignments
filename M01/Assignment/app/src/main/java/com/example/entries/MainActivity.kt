@@ -6,16 +6,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         const val STRING_KEY = "STRING_KEY"
         const val ID_KEY = "ID_KEY"
         const val ADD_BOOK = 345
@@ -27,23 +24,22 @@ class MainActivity : AppCompatActivity() {
         lateinit var preferences: SharedPreferences
     }
 
-
-
     lateinit var adapter: RecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         preferences = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE)
 
-        bookList = mutableListOf<Book>(
-            Book("Skyward", "It's so good", true, "0"),
-            Book("Harry Potter", "Liked the movies", false, "1"),
-            Book("Way of Kings", "It's so good", true, "2"),
-            Book("Skyward,It's so good,true,3")
-        )
+        BooksModel.updateBookList()
+        SharedPrefsDao.saveAllBookCvs()
+        SharedPrefsDao.saveAllIds()
 
+
+        
 
 
         //        bookList.forEach {
@@ -67,22 +63,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ADD_BOOK && resultCode == Activity.RESULT_OK){
+        if (requestCode == ADD_BOOK && resultCode == Activity.RESULT_OK) {
             val bookCSV = data?.getStringExtra(STRING_KEY)
-            if(bookCSV != null){
+            if (bookCSV != null) {
                 val book = Book(bookCSV)
                 bookList.add(book)
                 adapter.notifyDataSetChanged()
             }
         }
-        if (requestCode == EDIT_BOOK && resultCode == Activity.RESULT_OK){
-            val bookCSV = data?.getStringExtra(STRING_KEY)
-            if(bookCSV != null){
-                val book = Book(bookCSV)
-                val index = book.id
-                bookList[index!!.toInt()] = book
-                adapter.notifyDataSetChanged()
-            }
+        if (requestCode == EDIT_BOOK && resultCode == Activity.RESULT_OK) {
+            BooksModel.handleEditActivityResult(data!!)
+            adapter.notifyDataSetChanged()
+
         }
     }
 }

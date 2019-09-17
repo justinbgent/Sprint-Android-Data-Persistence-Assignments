@@ -1,9 +1,31 @@
 package com.example.entries
 
-class SharedPrefsDao {
-    companion object{
-        const val ID_LIST = "ID_LIST"
-        const val NEXT_ID = "NEXT_ID"
+object SharedPrefsDao {
+
+    const val ID_LIST = "ID_LIST"
+    const val NEXT_ID = "NEXT_ID"
+
+    fun saveAllIds() {
+        var ids = ""
+        for (i in MainActivity.bookList.indices) {
+            ids +=
+                if (MainActivity.bookList.size - 1 != i) {
+                    "$i,"
+                } else {
+                    "$i"
+                }
+        }
+        MainActivity.preferences.edit()
+            .putString(ID_LIST, ids)
+            .apply()
+    }
+
+    fun saveAllBookCvs(){
+        for (i in MainActivity.bookList.indices) {
+            MainActivity.preferences.edit()
+                .putString(MainActivity.bookList[i].id, MainActivity.bookList[i].toCsvString())
+                .apply()
+        }
     }
 
 //    val preferences: SharedPreferences = context.getSharedPreferences(MainActivity.USER_PREFERENCES, Context.MODE_PRIVATE)
@@ -20,8 +42,9 @@ class SharedPrefsDao {
 //        return ids
 //    }
 
-    fun getAllBookIds(): String{
-        return MainActivity.preferences.getString(ID_LIST, "")?: ""
+
+    fun getAllBookIds(): String {
+        return MainActivity.preferences.getString(ID_LIST, "") ?: ""
 //        var idList = MainActivity.preferences.getString(ID_LIST, "")
 //        val oldList = idList!!.split(",")
 //        val ids = ArrayList<String>(oldList.size)
@@ -35,19 +58,28 @@ class SharedPrefsDao {
 //        return MainActivity.bookList.size.toString()
 //    }
 
-    fun getNextId(): String{
-        return MainActivity.preferences.getString(NEXT_ID, "")?: ""
+    fun getNextId(): String {
+        return MainActivity.preferences.getString(NEXT_ID, "") ?: ""
     }
 
 //    fun getBookCSV(id: String): String{
 //        return MainActivity.bookList[id.toInt()].toCsvString()
 //    }
 
-    fun getBookCSV(id: String): String{
-        return MainActivity.preferences.getString(id, "")?: ""
+    fun getBookCSV(id: String): String {
+        return MainActivity.preferences.getString(id, "") ?: ""
     }
 
-    fun updateBook(book: Book){
-        MainActivity.bookList.add(book)
+    fun updateBook(book: Book) {
+        var bookUpdated = false
+        for (i in MainActivity.bookList.indices) {
+            if (MainActivity.bookList[i].id == book.id) {
+                MainActivity.bookList[i] = book
+                bookUpdated = true
+            }
+        }
+        if (!bookUpdated) {
+            MainActivity.bookList.add(book)
+        }
     }
 }
