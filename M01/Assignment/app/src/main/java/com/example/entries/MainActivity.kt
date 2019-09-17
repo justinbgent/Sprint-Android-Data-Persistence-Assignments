@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val STRING_KEY = "STRING_KEY"
         const val ID_KEY = "ID_KEY"
+
+        var bookList = mutableListOf<Book>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val bookList = mutableListOf<Book>(
+        bookList = mutableListOf<Book>(
             Book("Skyward", "It's so good", true, "0"),
             Book("Harry Potter", "Liked the movies", false, "1"),
             Book("Way of Kings", "It's so good", true, "2"),
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 //            textView.text = it.title
 //            linear_layout.addView(textView)
 //        }
-        linear_layout.childCount
 
         recycler_view.setHasFixedSize(true)
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
