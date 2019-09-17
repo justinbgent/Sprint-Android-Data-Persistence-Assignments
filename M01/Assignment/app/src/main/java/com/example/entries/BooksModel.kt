@@ -1,6 +1,7 @@
 package com.example.entries
 
 import android.content.Intent
+import android.util.Log
 
 class BooksModel {
     companion object{
@@ -13,6 +14,7 @@ class BooksModel {
                 ids.addAll(oldList)
             }
             ids.forEach {
+                Log.i("pleasework", it)
                 val csvString = SharedPrefsDao.getBookCSV(it)
                 SharedPrefsDao.updateBook(Book(csvString))
             }
@@ -33,6 +35,8 @@ class BooksModel {
                 val book = Book(bookCSV)
                 val index = book.id
                 MainActivity.bookList[index!!.toInt()] = book
+                SharedPrefsDao.saveAllBookCvs()
+                SharedPrefsDao.saveAllIds()
             }
         }
     }

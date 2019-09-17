@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var preferences: SharedPreferences
     }
 
+
+
     lateinit var adapter: RecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         SharedPrefsDao.saveAllIds()
 
 
-        
+
 
 
         //        bookList.forEach {
@@ -69,6 +71,9 @@ class MainActivity : AppCompatActivity() {
                 val book = Book(bookCSV)
                 bookList.add(book)
                 adapter.notifyDataSetChanged()
+
+                SharedPrefsDao.saveAllBookCvs()
+                SharedPrefsDao.saveAllIds()
             }
         }
         if (requestCode == EDIT_BOOK && resultCode == Activity.RESULT_OK) {

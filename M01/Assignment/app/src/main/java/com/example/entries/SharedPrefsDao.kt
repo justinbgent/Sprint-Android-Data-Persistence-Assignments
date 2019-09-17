@@ -1,9 +1,10 @@
 package com.example.entries
 
+import android.util.Log
+
 object SharedPrefsDao {
 
     const val ID_LIST = "ID_LIST"
-    const val NEXT_ID = "NEXT_ID"
 
     fun saveAllIds() {
         var ids = ""
@@ -22,6 +23,7 @@ object SharedPrefsDao {
 
     fun saveAllBookCvs(){
         for (i in MainActivity.bookList.indices) {
+            Log.i("pleasework", "$i")
             MainActivity.preferences.edit()
                 .putString(MainActivity.bookList[i].id, MainActivity.bookList[i].toCsvString())
                 .apply()
@@ -57,10 +59,6 @@ object SharedPrefsDao {
 //    fun getNextId(): String{
 //        return MainActivity.bookList.size.toString()
 //    }
-
-    fun getNextId(): String {
-        return MainActivity.preferences.getString(NEXT_ID, "") ?: ""
-    }
 
 //    fun getBookCSV(id: String): String{
 //        return MainActivity.bookList[id.toInt()].toCsvString()
