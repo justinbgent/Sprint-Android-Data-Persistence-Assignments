@@ -1,4 +1,4 @@
-package com.example.entries
+package com.example.entries.model
 
 class Book {
     var title: String? = null

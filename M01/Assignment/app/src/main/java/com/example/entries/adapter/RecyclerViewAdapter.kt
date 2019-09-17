@@ -1,4 +1,4 @@
-package com.example.entries
+package com.example.entries.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entries.R
+import com.example.entries.activity.EditBookActivity
+import com.example.entries.activity.MainActivity
+import com.example.entries.model.Book
 import kotlinx.android.synthetic.main.recycler_item.view.*
 
 class RecyclerViewAdapter(private val books: MutableList<Book>): RecyclerView.Adapter<RecyclerViewAdapter.Holder>() {

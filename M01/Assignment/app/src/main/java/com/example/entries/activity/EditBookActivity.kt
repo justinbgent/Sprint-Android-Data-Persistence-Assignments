@@ -1,10 +1,12 @@
-package com.example.entries
+package com.example.entries.activity
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.entries.model.Book
+import com.example.entries.R
 import kotlinx.android.synthetic.main.activity_edit_book.*
 
 class EditBookActivity : AppCompatActivity() {
@@ -18,7 +20,9 @@ class EditBookActivity : AppCompatActivity() {
         var id = intent.getStringExtra(MainActivity.ID_KEY)
 
         var bookCSV = intent.getStringExtra(MainActivity.STRING_KEY)
-        var book: Book? = if (bookCSV != null) Book(bookCSV) else null
+        var book: Book? = if (bookCSV != null) Book(
+            bookCSV
+        ) else null
 
         if (book != null){
             checkbox.isChecked = book.hasBeenRead
@@ -37,7 +41,12 @@ class EditBookActivity : AppCompatActivity() {
         fun returnData(): String{
             val title = edt_txt_title.text.toString()
             val reason = edt_txt_reason.text.toString()
-            book = Book(title, reason, hasBeenRead, id?: MainActivity.bookList.size.toString())
+            book = Book(
+                title,
+                reason,
+                hasBeenRead,
+                id ?: MainActivity.bookList.size.toString()
+            )
             return book?.toCsvString() ?: "Empty"
         }
 

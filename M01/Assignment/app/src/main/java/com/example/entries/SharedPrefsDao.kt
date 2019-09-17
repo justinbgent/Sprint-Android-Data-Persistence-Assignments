@@ -1,6 +1,7 @@
 package com.example.entries
 
-import android.util.Log
+import com.example.entries.activity.MainActivity
+import com.example.entries.model.Book
 
 object SharedPrefsDao {
 
@@ -23,46 +24,17 @@ object SharedPrefsDao {
 
     fun saveAllBookCvs(){
         for (i in MainActivity.bookList.indices) {
-            Log.i("pleasework", "$i")
             MainActivity.preferences.edit()
                 .putString(MainActivity.bookList[i].id, MainActivity.bookList[i].toCsvString())
                 .apply()
         }
     }
 
-//    val preferences: SharedPreferences = context.getSharedPreferences(MainActivity.USER_PREFERENCES, Context.MODE_PRIVATE)
-
-//    fun getAllBookIds(): String{
-//        var ids = ""
-//        for (i in MainActivity.bookList.indices){
-//            if (MainActivity.bookList.size -1 != i){
-//                ids += "$i,"
-//            }else{
-//                ids += "$i"
-//            }
-//        }
-//        return ids
-//    }
-
 
     fun getAllBookIds(): String {
         return MainActivity.preferences.getString(ID_LIST, "") ?: ""
-//        var idList = MainActivity.preferences.getString(ID_LIST, "")
-//        val oldList = idList!!.split(",")
-//        val ids = ArrayList<String>(oldList.size)
-//        if (idList.isNotBlank()){
-//            ids.addAll(oldList)
-//        }
-//        return ids
     }
 
-//    fun getNextId(): String{
-//        return MainActivity.bookList.size.toString()
-//    }
-
-//    fun getBookCSV(id: String): String{
-//        return MainActivity.bookList[id.toInt()].toCsvString()
-//    }
 
     fun getBookCSV(id: String): String {
         return MainActivity.preferences.getString(id, "") ?: ""

@@ -1,7 +1,9 @@
-package com.example.entries
+package com.example.entries.model
 
 import android.content.Intent
 import android.util.Log
+import com.example.entries.SharedPrefsDao
+import com.example.entries.activity.MainActivity
 
 class BooksModel {
     companion object{
@@ -19,15 +21,6 @@ class BooksModel {
                 SharedPrefsDao.updateBook(Book(csvString))
             }
         }
-
-//        fun populateBookList(){
-//            MainActivity.bookList = mutableListOf<Book>(
-//                Book("Skyward", "It's so good", true, "0"),
-//                Book("Harry Potter", "Liked the movies", false, "1"),
-//                Book("Way of Kings", "It's so good", true, "2"),
-//                Book("Skyward,It's so good,true,3")
-//            )
-//        }
 
         fun handleEditActivityResult(intent: Intent){
             val bookCSV = intent.getStringExtra(MainActivity.STRING_KEY)

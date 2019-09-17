@@ -1,4 +1,4 @@
-package com.example.entries
+package com.example.entries.activity
 
 import android.app.Activity
 import android.content.Context
@@ -8,6 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.entries.*
+import com.example.entries.adapter.RecyclerViewAdapter
+import com.example.entries.model.Book
+import com.example.entries.model.BooksModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,32 +38,27 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        preferences = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE)
+        preferences = this.getSharedPreferences(
+            USER_PREFERENCES, Context.MODE_PRIVATE)
 
         BooksModel.updateBookList()
         SharedPrefsDao.saveAllBookCvs()
         SharedPrefsDao.saveAllIds()
 
 
-
-
-
-        //        bookList.forEach {
-//            var textView = TextView(this)
-//            textView.text = it.title
-//            linear_layout.addView(textView)
-//        }
-
         recycler_view.setHasFixedSize(true)
         val manager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        adapter = RecyclerViewAdapter(bookList)
+        adapter =
+            RecyclerViewAdapter(bookList)
         recycler_view.layoutManager = manager
         recycler_view.adapter = adapter
 
         btn_add_book.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(ID_KEY, bookList.size.toString())
-            startActivityForResult(intent, ADD_BOOK)
+            startActivityForResult(intent,
+                ADD_BOOK
+            )
         }
     }
 
