@@ -1,4 +1,4 @@
-package com.example.entries
+package com.example.entries.sharedPref
 
 import com.example.entries.model.Book
 import com.example.entries.model.Constants

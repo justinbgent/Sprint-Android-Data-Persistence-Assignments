@@ -1,4 +1,4 @@
-package com.example.entries
+package com.example.entries.Controller
 
 import android.content.Intent
 import com.example.entries.model.Book

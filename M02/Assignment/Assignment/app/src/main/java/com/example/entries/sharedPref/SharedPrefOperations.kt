@@ -1,8 +1,9 @@
-package com.example.entries
+package com.example.entries.sharedPref
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.entries.BookRepoInterface
 import com.example.entries.model.Book
 import com.example.entries.model.Constants
 
