@@ -1,1 +1,40 @@
+CREATE TABLE players
+(
+  firstName TEXT,
+  lastName TEXT,
+  age INTEGER,
+  style TEXT,
+  id INTEGER PRIMARY KEY,
+  FOREIGN KEY(id) REFERENCES teams(teamId)
+  );
+  
+   INSERT INTO players (firstName, lastName, age, style, id)
+   VALUES ("Joe", "Ray", 23, "sloppy", 1);
+   
+   INSERT INTO players (firstName, lastName, age, style, id)
+   VALUES ("Jill", "Smith", 30, "fast", 2);
+   
+   INSERT INTO players (firstName, lastName, age, style, id)
+   VALUES ("John", "Carter", 34, "strong", 3);
+   
+   INSERT INTO players (firstName, lastName, age, style, id)
+   VALUES ("Jamie", "Trell", 25, "smart", 4);
 
+CREATE TABLE teams
+(
+  color TEXT,
+  skillLevel INTEGER,
+  teamId INTEGER PRIMARY KEY
+  );
+  
+  INSERT INTO teams (color, skillLevel, teamId)
+   VALUES ("blue", 8, 1);
+   
+   INSERT INTO teams (color, skillLevel, teamId)
+   VALUES ("red", 7, 2);
+   
+   INSERT INTO teams (color, skillLevel, teamId)
+   VALUES ("green", 9, 3);
+   
+   INSERT INTO teams (color, skillLevel, teamId)
+   VALUES ("yellow", 8, 4);
