@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EditBookActivity">
+
+    <EditText
+        android:id="@+id/edt_txt_title"
+        android:hint="@string/title"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_txt_reason"
+        android:hint="@string/reason_to_read"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_txt_title" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/edt_txt_id"-->
+<!--        android:hint="@string/id"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/edt_txt_reason" />-->
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edt_txt_reason"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:onClick="onCheckBoxClicked"/>
+
+    <TextView
+        android:id="@+id/have_read"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Have Read"
+        app:layout_constraintTop_toTopOf="@id/checkbox"
+        app:layout_constraintLeft_toRightOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_margin="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Book"
+        app:layout_constraintRight_toLeftOf="@+id/btn_cancel"
+        app:layout_constraintTop_toTopOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_margin="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintRight_toRightOf="@+id/edt_txt_reason"
+        app:layout_constraintTop_toTopOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

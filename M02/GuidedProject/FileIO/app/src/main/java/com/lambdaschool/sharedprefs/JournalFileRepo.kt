@@ -11,7 +11,7 @@ import java.io.*
 import java.lang.StringBuilder
 
 // TODO 3: Implement the interface here
-class JournalFileRepo(var context: Context?): JournalRepoInterface {
+class JournalFileRepo(var context: Context) : JournalRepoInterface {
     override fun updateEntry(entry: JournalEntry) {
     }
 
@@ -23,28 +23,28 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
     override fun createEntry(entry: JournalEntry) {
         val entryString = entry.toJsonObject()
         val filename = "jornalEntry${entry.date}.json"
-        writeToFile(filename, entryString)
+        writeToFile(filename, entryString.toString())
     }
 
     // TODO 8: writeToFile helper
-    override fun writeToFile(filename: String, entryString: String){
+    private fun writeToFile(filename: String, entryString: String) {
         val dir = storageDirectory
         val outputFile = File(dir, filename)
 
         //open filewriter
         var writer: FileWriter? = null
-        try{
+        try {
             //write
             writer = FileWriter(outputFile)
             writer.write(entryString)
-        } catch (e: IOException){
+        } catch (e: IOException) {
             e.printStackTrace()
-        }finally {
-            if(writer != null){
+        } finally {
+            if (writer != null) {
                 try {
                     //close
                     writer.close()
-                }catch (e2: IOException){
+                } catch (e2: IOException) {
                     e2.printStackTrace()
                 }
             }
@@ -52,16 +52,16 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
     }
 
     // TODO 9: Save storage directory as a member variable
-    var storageDirectory: File
+    private val storageDirectory: File
         get() {
-            if(isExternalStorageWriteable()) {
+            if (isExternalStorageWriteable) {
                 val directory = context.filesDir
                 return if (!directory.exists() && !directory.mkdirs()) {
-                    context?.cacheDir
+                    context.cacheDir
                 } else {
                     directory
                 }
-            }else{
+            } else {
                 return context.cacheDir
             }
 
@@ -71,23 +71,23 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
         }
 
     // TODO 10: Check for external storage is writeable
-    val isExternalStorageWriteable: Boolean
-        get{
+    private val isExternalStorageWriteable: Boolean
+        get(){
             val state = Environment.getExternalStorageState()
             return state == Environment.MEDIA_MOUNTED
         }
 
     override fun readAllEntries(): MutableList<JournalEntry> {
-        // get fil,elist
+        // get filelist
         val entries = ArrayList<JournalEntry>()
 
         //setup ArrayList
         //read in files and convert to objects
-        for(filename in filelist){
+        for (filename in filelist) {
             val json = readFromFile(filename)
             try {
                 entries.add(JournalEntry(JSONObject(json)))
-            }catch (e:JSONException){
+            } catch (e: JSONException) {
                 e.printStackTrace()
             }
         }
@@ -96,25 +96,23 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
 
     // TODO 12: Save fileList as a member variable
     val filelist: ArrayList<String>
-    get(){
-        val fileNames = arrayListOf<String>()
-        val dir = storageDirectory
+        get() {
+            val fileNames = arrayListOf<String>()
+            val dir = storageDirectory
 
-        val list = dir.list()
-        if (list != null){
-            for (name in list){
-                if(name in list){
-                    if (name.contains(".json")){
+            val list = dir.list()
+            if (list != null) {
+                for (name in list) {
+                    if (name.contains(".json")) {
                         fileNames.add(name)
                     }
                 }
             }
             return fileNames
         }
-    }
 
     // TODO 13: readFromFile helper
-    private fun readFromFile(filename: String): String{
+    private fun readFromFile(filename: String): String {
         val inputFile = File(storageDirectory, filename)
         var readString: String? = null
         var reader: FileReader? = null
@@ -125,13 +123,13 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
 //                readData.append(next)
 //                next = reader.read()
 //            }
-        }catch (e: FileNotFoundException){
+        } catch (e: FileNotFoundException) {
             e.printStackTrace()
-        }finally {
-            if(reader != null){
+        } finally {
+            if (reader != null) {
                 try {
                     reader.close()
-                }catch (e: IOException){
+                } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }

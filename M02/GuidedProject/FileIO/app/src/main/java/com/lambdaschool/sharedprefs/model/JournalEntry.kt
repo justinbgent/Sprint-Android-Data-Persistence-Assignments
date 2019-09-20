@@ -47,24 +47,19 @@ class JournalEntry : Serializable {
             this.image = ""
         }
         try {
-            this.dayRating = jsonObject.getString("day_rating")
+            this.dayRating = jsonObject.getInt("day_rating")
         }catch (e: JSONException){
             this.dayRating = 0
         }
         try {
-            this.id = jsonObject.getString("id")
+            this.id = jsonObject.getInt("id")
         }catch (e: JSONException){
             this.id = 0
         }
-
-
-
-
-
     }
 
     // TODO 7: Implement toJSONObject method
-    fun toJsonObject(): JSONObject {
+    fun toJsonObject(): JSONObject? {
         try {
             return JSONObject().apply {
                 put("date", date)
@@ -75,7 +70,7 @@ class JournalEntry : Serializable {
             }
         } catch (e: JSONException) {
             return try {
-                JSONObject("{\"date\" : $date, \"entry_text\" : $entryText, \"image\": $image, \"day_rating\": $dayRating, \"id\" : $id}")
+                JSONObject("{\"date\" : \"$date\", \"entry_text\" : \"$entryText\", \"image\": \"$image\", \"day_rating\": $dayRating, \"id\" : $id}")
             }catch (e2: JSONException){
                 e2.printStackTrace()
                 return null
@@ -126,7 +121,7 @@ class JournalEntry : Serializable {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US)
         val date = Date()
 
-        this.date = (date.time / 1000).
+        this.date = (date.time / 1000).toString()
     }
 
     fun getImage(): Uri? {
